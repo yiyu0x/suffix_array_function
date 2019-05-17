@@ -6,7 +6,7 @@
 #include <iomanip>
 #define SIZE 20
 void debug(struct suffix* SA, int n) {
-  cout << setw(SIZE) << "Suffix" << setw(SIZE) << "SA" << setw(SIZE) << "Hei" << endl;
+  cout << setw(SIZE) << "Suffix" << setw(SIZE) << "SA" << setw(SIZE) << endl;
   cout << setw(30) << "--------------------------" << endl;
   for(int i = 0; i < n; i++) 
     cout << setw(SIZE) << ""
@@ -14,21 +14,21 @@ void debug(struct suffix* SA, int n) {
          << setw(SIZE) << "" << endl;
 }
 
-int sum(int n) {
-    int sum = 0;
-    for(int i = 1; i <= n; i++) sum += i;
-    return sum;
-}
+// int sum(int n) {
+//     int sum = 0;
+//     for(int i = 1; i <= n; i++) sum += i;
+//     return sum;
+// }
 
-int hei_sum(struct suffix *SA, int n) {
-    int sum = 0;
-    for(int i = 0; i < n; i++) sum += SA[i].hei;
-    return sum;
-}
+// int hei_sum(struct suffix *SA, int n) {
+//     int sum = 0;
+//     for(int i = 0; i < n; i++) sum += SA[i].hei;
+//     return sum;
+// }
 
-int substring_amount(char *str, struct suffix *SA, int n) {
-    return sum(strlen(str)) - hei_sum(SA, n);
-}
+// int substring_amount(char *str, struct suffix *SA, int n) {
+//     return sum(strlen(str)) - hei_sum(SA, n);
+// }
 
 int main(int argc, char const *argv[]) {
   
@@ -39,14 +39,14 @@ int main(int argc, char const *argv[]) {
   for (int i = 1; i <= 100; i++) {
     ifstream infile;
     stringstream ss;
-    ss << "./data/TEXTs_1000/TEXT" << i << ".txt";
+    ss << "../data/TEXTs_1000/TEXT" << i << ".txt";
     infile.open(ss.str().c_str());
     char txt[articleSize];
     infile.read(txt, articleSize);
     infile.close();
 
     ss.str("");
-    ss << "./data/Target_for1000_Length100/TEXT" << i << ".txt";
+    ss << "../data/Target_for1000_Length100/TEXT" << i << ".txt";
     infile.open(ss.str().c_str());
     char target[targetSize];
     infile.read(target, targetSize);
