@@ -1,8 +1,10 @@
 #include <numeric>
 #include <iostream>
 #include <iomanip>
+#include <fstream>
+#include <sstream> 
 using namespace std;
-const int N = 1e5+1;
+const int N = 1000;
 void debug_suffix(int *SA, int *RA, int *Hei, char *S, const char*s="suffix array:"){
     int n = strlen(S);
     cout<<s<<endl;
@@ -78,13 +80,21 @@ int sub_string_amount(char*s, int* hei) {
     return sum - sum_hei;
 }
 
-char S[N] = "anana";
+char S[N];
 int SA[N], RA[N], Hei[N];
 int main(){
 
-    
-    build_suffix_array(SA,RA,S,true);
-    build_hei(SA,RA,S,Hei);
-    // debug_suffix(SA,RA,Hei,S,"Suffix Array(DES)");
-    cout << "子字串數量：" << sub_string_amount(S, Hei) << endl;
+    for (int i = 1; i <= 100; i++) {
+        ifstream infile;
+        stringstream ss;
+        ss << "../data/TEXTs_100000/TEXT" << i << ".txt";
+        infile.open(ss.str().c_str());
+        infile.read(S, N);
+        infile.close();
+
+        build_suffix_array(SA,RA,S,true);
+        build_hei(SA,RA,S,Hei);
+        // debug_suffix(SA,RA,Hei,S,"Suffix Array(DES)");
+        cout << "子字串數量：" << sub_string_amount(S, Hei) << endl;
+    }
 }

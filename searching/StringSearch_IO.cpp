@@ -41,14 +41,14 @@ int main() {
 		
 		ifstream infile;
 		stringstream ss;
-		ss << "./data/TEXTs_1000/TEXT" << i << ".txt";
+		ss << "../data/TEXTs_1000/TEXT" << i << ".txt";
 		infile.open(ss.str().c_str());
 		char article[articleSize];
 		infile.read(article, articleSize);
 		infile.close();
 		
 		ss.str("");
-		ss << "./data/Target_for1000_Length100/TEXT" << i << ".txt";
+		ss << "../data/Target_for1000_Length100/TEXT" << i << ".txt";
 		infile.open(ss.str().c_str());
 		char Target[targetSize];
 		infile.read(Target, 100);
