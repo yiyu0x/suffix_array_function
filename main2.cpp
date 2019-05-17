@@ -32,38 +32,46 @@ int substring_amount(char *str, struct suffix *SA, int n) {
 
 int main(int argc, char const *argv[]) {
 	
+  for (int i=1; i<100; i++) {
+
+    
     //可自行定義
-  ifstream f("a.txt");
-  char target[] = "community";
-  
-  string str;
-  if (f) {
-    ostringstream ss;
-    ss << f.rdbuf(); // reading data
-    str = ss.str();
-  } else {
-    cout << "error" << endl;
-    exit(0);
+    // cout << "./data/TEXTs_10000/TEXT" + to_string(i) + ".txt" << endl;
+    ifstream f("./data/TEXTs_1000/TEXT" + to_string(i) + ".txt");
+    string temp = "./data/Target_for1000_Length10/TEXT" + to_string(i) + ".txt";
+    char target[100];
+    strcpy(target, temp.c_str());
+
+    // char target[] = "community";
+    
+    string str;
+    if (f) {
+      ostringstream ss;
+      ss << f.rdbuf(); // reading data
+      str = ss.str();
+    } else {
+      cout << "error" << endl;
+      exit(0);
+    }
+    char txt[str.size() + 1];
+    strcpy(txt, str.c_str());
+
+    // char txt[] = "ababa"; 
+  	int n = strlen(txt); 
+  	struct suffix suffixes[n]; 
+  	int *suffixArr = buildSuffixArray(txt,  n, suffixes); 
+  	
+    // debug(suffixes, n);
+  	// cout << "Following is suffix array for " << txt << endl; 
+  	// printArr(suffixArr, n);
+  	
+    int substr_amount = substring_amount(txt, suffixes, n);
+  	cout << "子字串數量：" << substr_amount << endl;
+
+    // char target[] = "aba";
+    if (binary_search(suffixes, n, target))
+      cout << "find!" << endl;
+    else 
+      cout << "not found!" << endl;
   }
-  char txt[str.size() + 1];
-  strcpy(txt, str.c_str());
-
-  // char txt[] = "ababa"; 
-	int n = strlen(txt); 
-	struct suffix suffixes[n]; 
-	int *suffixArr = buildSuffixArray(txt,  n, suffixes); 
-	
-  // debug(suffixes, n);
-	// cout << "Following is suffix array for " << txt << endl; 
-	// printArr(suffixArr, n);
-	
-  int substr_amount = substring_amount(txt, suffixes, n);
-	cout << "子字串數量：" << substr_amount << endl;
-
-  // char target[] = "aba";
-  if (binary_search(suffixes, n, target))
-    cout << "find!" << endl;
-  else 
-    cout << "not found!" << endl;
-	return 0; 
 }
