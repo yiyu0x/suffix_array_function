@@ -83,7 +83,9 @@ int sub_string_amount(char*s, int* hei) {
 char S[N];
 int SA[N], RA[N], Hei[N];
 int main(){
-
+    
+    double cpu_time_used_to_build = 0;
+    double cpu_time_used_to_search = 0;
     for (int i = 1; i <= 100; i++) {
         ifstream infile;
         stringstream ss;
@@ -91,10 +93,20 @@ int main(){
         infile.open(ss.str().c_str());
         infile.read(S, N);
         infile.close();
-
+        time_t start_build, end_build;
+        start_build = clock();
         build_suffix_array(SA,RA,S,true);
         build_hei(SA,RA,S,Hei);
+        end_build = clock();
+        cpu_time_used_to_build += ((double) (end_build - start_build)) / CLOCKS_PER_SEC;
+
+        start_build = clock();
+        int amount = sub_string_amount(S, Hei);
+        end_build = clock();
+        cpu_time_used_to_search += ((double) (end_build - start_build)) / CLOCKS_PER_SEC;
         // debug_suffix(SA,RA,Hei,S,"Suffix Array(DES)");
-        cout << "子字串數量：" << sub_string_amount(S, Hei) << endl;
+        cout << "子字串數量：" << amount << endl;
     }
+    cout << "build time :" << cpu_time_used_to_build << endl;
+    cout << "search time:" << cpu_time_used_to_search << endl;
 }

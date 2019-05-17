@@ -1,5 +1,6 @@
-// SA.cpp: 定義主控台應用程式的進入點。
+// SA.cpp: ©w¸q¥D±±¥xÀ³¥Îµ{¦¡ªº¶i¤JÂI¡C
 //
+#include <typeinfo>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -7,13 +8,14 @@
 #include <set>
 
 using namespace std;
-string S1, S2;
+char T[100000];
+string S1;
 
 int SubStringCount(string S1)
 {
 	set<string> mySet;
-	for (int p = 0; p < S1.length(); p++)			//從字串的何處開始
-		for (int q = 1; q < S1.length() - p + 1; q++)		//子字串的長度
+	for (int p = 0; p < S1.length(); p++)			
+		for (int q = 1; q < S1.length() - p + 1; q++)
 		{
 			string tmp = S1.substr(p, q);
 			mySet.insert(tmp);
@@ -23,25 +25,22 @@ int SubStringCount(string S1)
 }
 
 int main() {
-	// cout << "目標：算出一字串之相異子字串數量" << endl;
-	// cout << "請輸入要算幾次" << endl;
-	// int t;
-	// cin >> t;
-	// while (t--) {
-	// cout << "輸入目標字串" << endl;
-	// cin >> S1;
-	// int N = 1000;
+	double cpu_time;
     for (int i = 1; i <= 100; i++) {
         ifstream infile;
         stringstream ss;
-        ss << "../data/TEXTs_100000/TEXT" << i << ".txt";
-        // infile.open(ss.str().c_str());
-        // infile.read(S1, N);
-        // infile.close();
-
-	
-		int Ans = SubStringCount(ss.str());
-		cout << "有 " << Ans << " 個!" << endl;
+        ss << "../data/TEXTs_1000/TEXT" << i << ".txt";
+        infile.open(ss.str().c_str());
+        infile.read(T, 1000);
+        infile.close();
+		S1 = string(T);
+		time_t start_build, end_build;
+		start_build = clock();
+		int Ans = SubStringCount(S1);
+		end_build = clock();
+		cpu_time += ((double) (end_build - start_build)) / CLOCKS_PER_SEC;
+		cout << "子字串數量：" << Ans << endl;
 	}
+	cout << "time :" << cpu_time << endl;
 	// }
 }
