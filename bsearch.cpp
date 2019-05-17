@@ -1,7 +1,16 @@
 #include <iostream>
+#include <string.h> 
 using namespace std;
 
+int cmp_(struct suffix a, struct suffix b) { 
+    return string(a.suff) < string(b.suff);
+} 
 bool binary_search(struct suffix *SA, int n, char *target) {
+	
+	sort(SA, SA+n, cmp_);
+	// debug
+	// for(int i=0; i<n; i++) cout << SA[i].suff << endl;
+
 	int left = 0;
 	int right = n;
 	int target_len = strlen(target);
