@@ -1,6 +1,7 @@
 // REF : https://www.geeksforgeeks.org/suffix-array-set-1-introduction/
 #include <cstring> 
 #include <algorithm> 
+#include <iostream>
 using namespace std; 
   
 // Structure to store information of a suffix 
@@ -55,15 +56,16 @@ int *buildSuffixArray(char *txt, int n, struct suffix *suffixes) {
         suffixes[i].index = i; 
         suffixes[i].suff = (txt+i); 
     } 
-  
     // Sort the suffixes using the comparison function 
     // defined above. 
     sort(suffixes, suffixes+n, cmp); 
+
     // Store indexes of all sorted suffixes in the suffix array 
     int *suffixArr = new int[n]; 
     for (int i = 0; i < n; i++) 
         suffixArr[i] = suffixes[i].index; 
-  
+    
+    build_hei(suffixes, n);
     // Return the suffix array 
     return  suffixArr; 
 } 
