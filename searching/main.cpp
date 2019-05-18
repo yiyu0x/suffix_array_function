@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream> 
 using namespace std;
-const int N = 100;
+const int N = 100000;
 void debug_suffix(int *SA, int *RA, int *Hei, char *S, const char*s="suffix array:"){
     int n = strlen(S);
     cout<<s<<endl;
@@ -100,27 +100,27 @@ int main(){
     for (int i = 1; i <= 100; i++) {
         ifstream infile;
         stringstream ss;
-        // ss << "../data/TEXTs_1000/TEXT" << i << ".txt";
-        ss << "../data/article.txt";
+        ss << "../data/TEXTs_1000/TEXT" << i << ".txt";
+        // ss << "../data/article.txt";
         infile.open(ss.str().c_str());
         infile.read(S, N);
         S[N-1] = 0;
-        cout << "文本:"<< S << "長度:" << strlen(S) << endl;
+        // cout << "文本:"<< S << "長度:" << strlen(S) << endl;
         infile.close();
         time_t start_build, end_build;
         start_build = clock();
         build_suffix_array(SA,RA,S,true);
         end_build = clock();
         cpu_time_used_to_build += ((double) (end_build - start_build)) / CLOCKS_PER_SEC;
-        debug(SA, S);
+        // debug(SA, S);
         // cout << S << endl;
 
         ss.str("");
-        // ss << "../data/Target_for1000_Length10/TEXT" << i << ".txt";
-        ss << "../data/target.txt";
+        ss << "../data/Target_for1000_Length10/TEXT" << i << ".txt";
+        // ss << "../data/target.txt";
 
         infile.open(ss.str().c_str());
-        char targetSize = 10+1;
+        char targetSize = 10 + 1;
         char target[targetSize+1];
         infile.read(target, targetSize);
         target[targetSize-1] = 0;
@@ -133,7 +133,7 @@ int main(){
           cout << "not found" << endl;
         }
         
-        break;
+        // break;
         // start_build = clock();
         // int amount = sub_string_amount(S, Hei);
         // end_build = clock();

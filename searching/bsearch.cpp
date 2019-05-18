@@ -27,7 +27,7 @@ bool binary_search(int *SA, int n, char *target, char *article) {
 		for (int i = 0; i < target_len; i++) {
 			if (target[i] != article[SA[mid]+i]) {
 				// cout << target[i] << "!=" << article[SA[mid]+i] << endl;
-				if (target[i] > article[SA[mid+i]]) 
+				if (target[i] > article[SA[mid]+i]) 
 					left = mid+1;
 				else 
 					right = mid-1;
