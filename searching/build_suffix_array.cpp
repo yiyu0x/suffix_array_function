@@ -73,7 +73,7 @@ int *buildSuffixArray(char *txt, int n, struct suffix *suffixes) {
         suffixes[i].rank[1] = ((i+1) < n)? (txt[i + 1] - 'a'): 10000;
     }
 
-    sort(suffixes, suffixes+n, cmp);
+    // sort(suffixes, suffixes+n, cmp);
 
     int ind[n];  // This array is needed to get the index in suffixes[]
                  // from original index.  This mapping is needed to get

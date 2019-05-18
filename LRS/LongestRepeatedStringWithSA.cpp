@@ -165,7 +165,7 @@ int main()
 		stringstream ss;
 		ss << "../data/TEXTs_100000/TEXT" << i << ".txt";
 		infile.open(ss.str().c_str());
-		infile.read(T, 1000);
+		infile.read(T, 10000);
 		infile.close();
 		
 		start = clock();
