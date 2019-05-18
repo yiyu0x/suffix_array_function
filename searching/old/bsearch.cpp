@@ -5,12 +5,7 @@ using namespace std;
 // int cmp_(struct suffix a, struct suffix b) { 
     // return string(a.suff) < string(b.suff);
 // } 
-
-string substring(char* txt, int start) {
-	string s(txt);
-	return s.substr(start);
-}
-bool binary_search(int *SA, int n, char *target, char *article) {
+bool binary_search(struct suffix *SA, int n, char *target, char *article) {
 	
 	// sort(SA, SA+n, cmp_);
 	// debug
@@ -23,19 +18,23 @@ bool binary_search(int *SA, int n, char *target, char *article) {
 	while (left <= right) {
 		int flag = 1;
 		int mid = (left + right) / 2; 
-		// cout << "->" << substring(article, mid) << endl;
+		// cout << "->" << SA[mid].suff << endl;
 		for (int i = 0; i < target_len; i++) {
-			if (target[i] != article[SA[mid]+i]) {
-				// cout << target[i] << "!=" << article[SA[mid]+i] << endl;
-				if (target[i] > article[SA[mid+i]]) 
-					left = mid+1;
-				else 
-					right = mid-1;
-				flag = 0;
-				break;
-			} else {
-				// cout << "i=" << i << endl;
-				// cout << target[i] << "=" << article[SA[mid]+i] << endl;
+			// cout << "@index" << SA[mid].index<< endl;
+			// cout << "@i" << i << endl;
+			// cout << target[i] << ":" << article[SA[mid].index + i] << endl;
+			if (target[i] != article[SA[mid].index + i]) {
+					// cout << "false" << endl;
+				// if (SA[mid].index + i <= article_len) {
+					// cout << target[i] << ":" << article[SA[i].index + i] << endl;
+					// cout << ":::" << SA[i].index + i << endl;
+					if (target[i] > article[SA[mid].index + i]) 
+						left = mid+1;
+					else 
+						right = mid-1;
+					flag = 0;
+					break;
+				// }
 			}
 		}
 		if (flag) return true;
