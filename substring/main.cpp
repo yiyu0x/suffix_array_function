@@ -4,7 +4,7 @@
 #include <fstream>
 #include <sstream> 
 using namespace std;
-const int N = 1000;
+const int N = 1000001;
 void debug_suffix(int *SA, int *RA, int *Hei, char *S, const char*s="suffix array:"){
     int n = strlen(S);
     cout<<s<<endl;

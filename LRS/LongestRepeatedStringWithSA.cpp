@@ -11,7 +11,7 @@ using namespace std;
 
 int test, cas = 1;
 
-const int SIZ = 10000050; // maximum possible size
+const int SIZ = 10000001; // maximum possible size
 
 int n; // text length
 char T[SIZ]; // text
@@ -163,7 +163,7 @@ int main()
 		
 		ifstream infile;
 		stringstream ss;
-		ss << "../data/TEXTs_1000/TEXT" << i << ".txt";
+		ss << "../data/TEXTs_100000/TEXT" << i << ".txt";
 		infile.open(ss.str().c_str());
 		infile.read(T, 1000);
 		infile.close();

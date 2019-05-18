@@ -32,21 +32,21 @@ void debug(struct suffix* SA, int n) {
 
 int main(int argc, char const *argv[]) {
   
-  const int articleSize = 1000;
-  const int targetSize = 100;
+  const int articleSize = 100000;
+  const int targetSize = 10;
   double cpu_time_used_to_build = 0;
   double cpu_time_used_to_search = 0;
   for (int i = 1; i <= 100; i++) {
     ifstream infile;
     stringstream ss;
-    ss << "../data/TEXTs_1000/TEXT" << i << ".txt";
+    ss << "../data/TEXTs_100000/TEXT" << i << ".txt";
     infile.open(ss.str().c_str());
     char txt[articleSize];
     infile.read(txt, articleSize);
     infile.close();
 
     ss.str("");
-    ss << "../data/Target_for1000_Length100/TEXT" << i << ".txt";
+    ss << "../data/Target_for100000_Length10/TEXT" << i << ".txt";
     infile.open(ss.str().c_str());
     char target[targetSize];
     infile.read(target, targetSize);
