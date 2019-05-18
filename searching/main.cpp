@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream> 
 using namespace std;
-const int N = 100000;
+const int N = 100;
 void debug_suffix(int *SA, int *RA, int *Hei, char *S, const char*s="suffix array:"){
     int n = strlen(S);
     cout<<s<<endl;
@@ -83,7 +83,7 @@ int sub_string_amount(char*s, int* hei) {
 
 void debug(int *SA, char* S) {
   int len = strlen(S);
-  int SIZE = 20;
+  int SIZE = 29;
   cout << setw(SIZE) << "Suffix" << setw(SIZE) << "SA" << setw(SIZE) << endl;
   cout << setw(SIZE*3) << "--------------------------" << endl;
   for (int i = 0; i < len; i++) {
@@ -100,27 +100,31 @@ int main(){
     for (int i = 1; i <= 100; i++) {
         ifstream infile;
         stringstream ss;
-        ss << "../data/TEXTs_100000/TEXT" << i << ".txt";
-        // ss << "../data/article.txt";
+        // ss << "../data/TEXTs_1000/TEXT" << i << ".txt";
+        ss << "../data/article.txt";
         infile.open(ss.str().c_str());
         infile.read(S, N);
+        S[N-1] = 0;
+        cout << "文本:"<< S << "長度:" << strlen(S) << endl;
         infile.close();
         time_t start_build, end_build;
         start_build = clock();
         build_suffix_array(SA,RA,S,true);
         end_build = clock();
         cpu_time_used_to_build += ((double) (end_build - start_build)) / CLOCKS_PER_SEC;
-        // debug(SA, S);
+        debug(SA, S);
+        // cout << S << endl;
+
         ss.str("");
-        ss << "../data/Target_for100000_Length10/TEXT" << i << ".txt";
-        // ss << "../data/target.txt";
+        // ss << "../data/Target_for1000_Length10/TEXT" << i << ".txt";
+        ss << "../data/target.txt";
 
         infile.open(ss.str().c_str());
-        char targetSize = 10;
+        char targetSize = 10+1;
         char target[targetSize+1];
         infile.read(target, targetSize);
-        target[targetSize] = 0;
-        cout << target << " len:" << strlen(target) << endl;
+        target[targetSize-1] = 0;
+        cout << "欲搜尋字串:" << target << endl;
         infile.close();
 // /bool binary_search(int *SA, int n, char *target, char *article) {
         if (binary_search(SA, strlen(S), target, S)) {
